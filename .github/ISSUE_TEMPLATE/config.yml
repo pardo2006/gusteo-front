@@ -1,0 +1,17 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Preguntas y debate en GitHub Discussions
+    url: https://github.com/orgs/menu360/discussions
+    about: Dudas de uso, propuestas de diseño en fase temprana, decisiones de arquitectura y ayuda de la comunidad.
+  - name: 🔐 Reportar una vulnerabilidad de seguridad
+    url: https://github.com/menu360/menu360-frontend/security/advisories/new
+    about: Reporte privado de vulnerabilidades. También puedes escribir a security@menu360.app. Nunca abras un issue público.
+  - name: 🧩 Catálogo de componentes (Storybook)
+    url: https://storybook.menu360.app
+    about: Referencia visual y documentación de todos los componentes del sistema de diseño.
+  - name: 🖥️ Issues del backend (API, WebSockets, base de datos)
+    url: https://github.com/menu360/menu360-backend/issues
+    about: Si el problema está en la respuesta de la API o en los eventos de tiempo real, repórtalo en el repositorio del backend.
+  - name: 📩 Contacto general
+    url: mailto:dev@menu360.app
+    about: Consultas comerciales, colaboraciones o cualquier asunto que no encaje en un issue.

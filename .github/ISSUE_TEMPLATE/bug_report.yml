@@ -1,0 +1,192 @@
+name: 🐛 Reporte de bug
+description: Informa de un comportamiento incorrecto en la carta pública, el visor 3D, el carrito o el panel
+title: "[bug]: "
+labels: ["bug", "triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por dedicar un momento a reportar este bug.
+
+        > ⚠️ **Si el fallo tiene implicaciones de seguridad** (XSS, fuga de tokens, acceso a datos de otro restaurante...) **no lo reportes aquí**.
+        > Sigue el procedimiento privado descrito en [SECURITY.md](https://github.com/menu360/menu360/blob/develop/docs/SECURITY.md) o escribe a `security@menu360.app`.
+
+  - type: checkboxes
+    id: comprobaciones-previas
+    attributes:
+      label: Comprobaciones previas
+      options:
+        - label: He buscado en los issues abiertos y cerrados y no he encontrado uno igual.
+          required: true
+        - label: He reproducido el fallo con la última versión de la rama `develop`.
+          required: true
+        - label: He comprobado que no es un fallo del backend (`menu360-backend`) revisando la respuesta de la API en la pestaña Network.
+          required: true
+        - label: Este fallo no expone una vulnerabilidad de seguridad.
+          required: true
+
+  - type: textarea
+    id: descripcion
+    attributes:
+      label: Descripción del problema
+      description: Explica de forma clara y concisa qué falla.
+      placeholder: Al cambiar de plato en la carta, el visor 3D mantiene el modelo anterior en pantalla durante unos segundos y luego se congela.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduccion
+    attributes:
+      label: Pasos para reproducir
+      value: |
+        1. Abrir `/m/restaurante-demo` en el navegador.
+        2. Pulsar sobre el plato "Paella valenciana" y esperar a que cargue el modelo 3D.
+        3. Cerrar la ficha y abrir "Pulpo a la gallega".
+        4. Observar el visor.
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: esperado
+    attributes:
+      label: Comportamiento esperado
+      placeholder: El visor debe liberar el modelo anterior y mostrar el nuevo con su indicador de carga.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Comportamiento actual
+      placeholder: Se sigue viendo la paella durante ~4 s, la pestaña sube a 1,8 GB de memoria y el canvas deja de responder.
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Versión de Menu360 Frontend
+      description: Campo `version` de `package.json` o commit (`git rev-parse --short HEAD`).
+      placeholder: "0.1.0 / 7d21ab4"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: entorno
+    attributes:
+      label: Entorno donde se reproduce
+      options:
+        - Desarrollo local (npm run dev)
+        - Desarrollo local (docker compose)
+        - Build de producción local (npm run build && npm run start)
+        - Preview deployment de un PR
+        - Staging
+        - Producción
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área afectada
+      multiple: true
+      options:
+        - Carta pública (/m/[slug])
+        - Visor 3D (Three.js / React Three Fiber)
+        - Carrito y pedido (/mesa/[token])
+        - Tiempo real (WebSocket)
+        - Panel de administración (/admin)
+        - Autenticación y sesión
+        - Formularios y validación (RHF + Zod)
+        - Estilos y diseño responsive (Tailwind)
+        - Internacionalización (es/en/ca)
+        - Accesibilidad
+        - Rendimiento / tamaño del bundle
+        - Build, Docker o CI
+        - Otro / no lo sé
+    validations:
+      required: true
+
+  - type: dropdown
+    id: navegador
+    attributes:
+      label: Navegador
+      options:
+        - Chrome (escritorio)
+        - Edge (escritorio)
+        - Firefox (escritorio)
+        - Safari (macOS)
+        - Safari (iOS / iPadOS)
+        - Chrome (Android)
+        - Samsung Internet
+        - Otro
+    validations:
+      required: true
+
+  - type: input
+    id: version-navegador
+    attributes:
+      label: Versión del navegador y dispositivo
+      placeholder: "Chrome 138.0.7204.93 — Pixel 8 (Android 15) / Safari 18.4 — iPhone 14"
+    validations:
+      required: true
+
+  - type: input
+    id: version-node
+    attributes:
+      label: Versión de Node.js y npm
+      description: Salida de `node --version` y `npm --version`. Indícalo aunque el fallo sea de runtime en el navegador.
+      placeholder: "v22.14.0 / 10.9.2"
+    validations:
+      required: true
+
+  - type: input
+    id: so
+    attributes:
+      label: Sistema operativo
+      placeholder: "macOS 15.3 (Apple Silicon) / Windows 11 / Ubuntu 24.04 / Android 15"
+    validations:
+      required: false
+
+  - type: textarea
+    id: consola
+    attributes:
+      label: Errores de consola y terminal
+      description: |
+        Pega los errores de la consola del navegador (DevTools) y de la terminal de `next dev`.
+        **Elimina tokens, cookies y datos personales antes de pegarlos.**
+      render: shell
+      placeholder: |
+        Uncaught TypeError: Cannot read properties of null (reading 'geometry')
+            at DishViewer (components/viewer3d/DishViewer.tsx:64:21)
+    validations:
+      required: false
+
+  - type: textarea
+    id: capturas
+    attributes:
+      label: Capturas o vídeo
+      description: Obligatorio si el fallo es visual o de animación. Arrastra aquí las imágenes o el vídeo.
+    validations:
+      required: false
+
+  - type: textarea
+    id: contexto
+    attributes:
+      label: Contexto adicional
+      description: Modelo `.glb` implicado, disponibilidad de WebGL2 (`chrome://gpu`), extensiones activas, conexión lenta, hipótesis sobre la causa...
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: colaboracion
+    attributes:
+      label: Colaboración
+      options:
+        - label: Estoy dispuesto/a a enviar un Pull Request que corrija este bug.
+          required: false
+        - label: Puedo aportar un test de Vitest o Playwright que reproduzca el fallo.
+          required: false

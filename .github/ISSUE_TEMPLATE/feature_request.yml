@@ -1,0 +1,135 @@
+name: 💡 Propuesta de funcionalidad
+description: Sugiere una mejora en la interfaz, el visor 3D, el flujo de pedido o el panel
+title: "[feat]: "
+labels: ["enhancement", "triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por proponer una mejora. Describe el **problema del usuario** (comensal, camarero o encargado) antes que la solución técnica.
+
+        Para ideas en fase temprana usa mejor las [GitHub Discussions](https://github.com/orgs/menu360/discussions).
+
+  - type: checkboxes
+    id: comprobaciones-previas
+    attributes:
+      label: Comprobaciones previas
+      options:
+        - label: He buscado en los issues y Discussions y no existe una propuesta equivalente.
+          required: true
+
+  - type: textarea
+    id: problema
+    attributes:
+      label: Problema que resuelve
+      description: ¿Qué fricción tiene hoy el usuario? Describe la situación real en el restaurante.
+      placeholder: |
+        Los comensales con alergias tienen que abrir plato por plato para comprobar si contienen gluten
+        o frutos secos, lo que hace muy lento recorrer una carta de 60 platos desde el móvil.
+    validations:
+      required: true
+
+  - type: textarea
+    id: solucion
+    attributes:
+      label: Solución propuesta
+      description: Describe el comportamiento e interfaz deseados. Si tienes un boceto o referencia, adjúntalo.
+      placeholder: |
+        Barra de filtros fija bajo el buscador con los 14 alérgenos oficiales. Al activar uno,
+        los platos que lo contienen se ocultan y aparece un contador de resultados.
+        La selección se mantiene durante toda la sesión de mesa.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternativas
+    attributes:
+      label: Alternativas consideradas
+      placeholder: |
+        - Mostrar iconos de alérgenos en cada tarjeta: satura el listado en móvil y no resuelve el filtrado.
+        - Un buscador por texto: obliga al usuario a conocer el nombre exacto del alérgeno.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área afectada
+      multiple: true
+      options:
+        - menu-publico — carta del comensal (/m/[slug])
+        - viewer3d — visor de modelos 3D
+        - cart — carrito y confirmación de pedido
+        - orders — seguimiento del estado del pedido
+        - realtime — WebSockets y eventos en vivo
+        - admin — panel de administración del restaurante
+        - auth — login, sesión y roles
+        - ui — sistema de componentes y Storybook
+        - i18n — traducciones es/en/ca
+        - a11y — accesibilidad
+        - api-client — capa de datos (Axios, React Query, Zod)
+        - qr — flujo de escaneo QR/NFC
+        - perf — rendimiento y tamaño del bundle
+    validations:
+      required: true
+
+  - type: dropdown
+    id: impacto
+    attributes:
+      label: Impacto estimado
+      options:
+        - Crítico — bloquea el uso diario de la aplicación
+        - Alto — mejora sustancial para la mayoría de usuarios
+        - Medio — útil para un subconjunto de restaurantes o comensales
+        - Bajo — mejora de conveniencia o de experiencia de desarrollo
+    validations:
+      required: true
+
+  - type: dropdown
+    id: dispositivo
+    attributes:
+      label: Dispositivo principal afectado
+      multiple: true
+      options:
+        - Móvil (comensal escaneando el QR)
+        - Tablet (camarero en sala)
+        - Escritorio (panel de administración)
+        - Pantalla de cocina
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: dependencias
+    attributes:
+      label: Dependencias e impacto técnico
+      options:
+        - label: Requiere cambios en la API de `menu360-backend` (enlaza el issue correspondiente).
+          required: false
+        - label: Rompe la interfaz o el contrato de algún componente público (BREAKING CHANGE).
+          required: false
+        - label: Añade una dependencia npm nueva (indícala y justifica su tamaño).
+          required: false
+        - label: Requiere textos nuevos en los tres ficheros de i18n.
+          required: false
+
+  - type: dropdown
+    id: implementacion
+    attributes:
+      label: Disposición a implementarlo
+      options:
+        - Sí, puedo implementarlo y enviar un Pull Request
+        - Sí, con orientación de un maintainer
+        - Puedo ayudar solo con diseño, tests o documentación
+        - No, únicamente propongo la idea
+    validations:
+      required: true
+
+  - type: textarea
+    id: contexto
+    attributes:
+      label: Contexto adicional
+      description: Bocetos, referencias de otros productos, requisitos legales de etiquetado, métricas que respalden la propuesta...
+    validations:
+      required: false

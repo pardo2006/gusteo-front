@@ -1,0 +1,84 @@
+name: ❓ Pregunta
+description: Consulta sobre el uso, la configuración o la arquitectura del frontend
+title: "[pregunta]: "
+labels: ["question", "triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Las conversaciones abiertas encajan mejor en las
+        [GitHub Discussions](https://github.com/orgs/menu360/discussions). Usa este formulario si crees que la
+        respuesta debería acabar reflejada en la documentación del repositorio.
+
+  - type: checkboxes
+    id: busqueda-previa
+    attributes:
+      label: Búsqueda previa
+      description: Obligatorio para poder abrir la pregunta.
+      options:
+        - label: Ya he buscado en la documentación (`docs/README.md`, `docs/CONTRIBUTING.md`, Storybook) y en los issues existentes, y no he encontrado la respuesta.
+          required: true
+
+  - type: textarea
+    id: pregunta
+    attributes:
+      label: Tu pregunta
+      description: Sé lo más concreto posible.
+      placeholder: |
+        ¿Cuál es la forma recomendada de hidratar una query de TanStack React Query desde un
+        Server Component sin duplicar la petición en el cliente al montar la carta?
+    validations:
+      required: true
+
+  - type: textarea
+    id: contexto
+    attributes:
+      label: Contexto
+      description: Qué estás intentando conseguir y qué has probado hasta ahora.
+      placeholder: |
+        Estoy añadiendo una sección de sugerencias del chef en /m/[slug]. Uso prefetchQuery en el
+        Server Component, pero el cliente vuelve a lanzar la petición nada más hidratar.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área de la pregunta
+      options:
+        - Instalación y entorno de desarrollo
+        - Variables de entorno y configuración
+        - App Router, Server Components y renderizado
+        - Capa de datos (Axios, React Query, Zod)
+        - WebSockets y tiempo real
+        - Visor 3D (Three.js / React Three Fiber)
+        - Estilos y Tailwind CSS v4
+        - Formularios (React Hook Form + Zod)
+        - Internacionalización
+        - Accesibilidad
+        - Tests (Vitest, Testing Library, Playwright)
+        - Rendimiento y tamaño del bundle
+        - Build, Docker y despliegue
+        - Arquitectura general
+        - Otro
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Versión o commit
+      placeholder: "0.1.0 / 7d21ab4"
+    validations:
+      required: false
+
+  - type: textarea
+    id: extractos
+    attributes:
+      label: Código o configuración relevante
+      description: Fragmentos de componentes, hooks o `next.config.ts`. **Elimina cualquier token o secreto antes de pegarlo.**
+      render: tsx
+    validations:
+      required: false
